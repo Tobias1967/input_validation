@@ -18,9 +18,10 @@ class _FormScreenState extends State<FormScreen> {
         child: Form(
           child: Column(children: [
             TextFormField(
+              /////////////////////////  Passwortfeld ////////////
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: "Email",
+                labelText: "Email-Eingabe",
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: validateEmail,
@@ -30,7 +31,7 @@ class _FormScreenState extends State<FormScreen> {
               obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: "Passwort",
+                labelText: "Passwort-Abfrage",
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: validatePassword,
@@ -38,7 +39,7 @@ class _FormScreenState extends State<FormScreen> {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {},
-              child: const Text("Login"),
+              child: const Text("App-Login"),
             ),
           ]),
         ),
@@ -51,11 +52,11 @@ class _FormScreenState extends State<FormScreen> {
     if (input == null || input.isEmpty) {
       return "Pflichtfeld";
     } else if (!input.contains('@')) {
-      return "E-Mail muss ein '@' enthalten";
+      return "Ihre E-Mail muss ein '@' enthalten";
     } else if (!(input.endsWith('.com') || input.endsWith('.de'))) {
-      return "E-Mail muss mit .com oder .de enden";
+      return "Ihre E-Mail muss mit .com oder .de enden";
     } else if (input.length < 6) {
-      return "E-Mail muss mehr als 6 Zeichen haben";
+      return "E-Mail muss aus mehr als 6 Zeichen bestehen";
     }
     return null;
   }
