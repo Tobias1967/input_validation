@@ -44,6 +44,15 @@ class FormScreen extends StatelessWidget {
   }
 
   String? validateEmail(String? input) {
+      if (input == || input ==""){
+        return "Pflichtfeld";
+      } else if (input.length >=8){
+        return null;
+      }else {
+        return "Mindestens 3 Zeichen";
+      }
+
+
     // TODO: implementiere hier die Logik, die im Task Sheet beschrieben ist
     return null;
   }
