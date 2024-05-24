@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
-  // Konstruktor
   const FormScreen({super.key});
 
   @override
@@ -9,16 +8,28 @@ class FormScreen extends StatefulWidget {
 }
 
 class _FormScreenState extends State<FormScreen> {
-  // Methoden
+  final GlobalKey<FormState> _formKey =
+      GlobalKey<FormState>(); // GlobalKey für das Formular
+
+  void _trySubmitForm() {
+    final isValid = _formKey.currentState?.validate(); // Validiert die Form
+    if (isValid == true) {
+      // Wenn das Formular gültig ist, hier könnte man weitere Schritte durchführen
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Form(
+          key: _formKey, // Verwendung des GlobalKey für die Form
           child: Column(children: [
             TextFormField(
-              /////////////////////////  Passwortfeld ////////////
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Email-Eingabe",
@@ -38,7 +49,8 @@ class _FormScreenState extends State<FormScreen> {
             ),
             const SizedBox(height: 32),
             ElevatedButton(
-              onPressed: () {},
+              onPressed:
+                  _trySubmitForm, // Verbindung des Buttons mit der Submit-Funktion
               child: const Text("App-Login"),
             ),
           ]),
@@ -47,7 +59,6 @@ class _FormScreenState extends State<FormScreen> {
     );
   }
 
-  // E-Mail-Validierung
   String? validateEmail(String? input) {
     if (input == null || input.isEmpty) {
       return "Pflichtfeld";
@@ -61,7 +72,6 @@ class _FormScreenState extends State<FormScreen> {
     return null;
   }
 
-  // Passwort-Validierung
   String? validatePassword(String? input) {
     if (input == null || input.isEmpty) {
       return "Pflichtfeld";
